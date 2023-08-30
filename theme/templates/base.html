@@ -1,0 +1,31 @@
+{% load static tailwind_tags webpush_notifications i18n %}
+
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+        <title>Django Tailwind</title>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <script type="text/javascript" src="{% url 'js-catalog' %}"></script>
+        {% if request %}
+            {% webpush_header %}
+        {% endif %}
+        {% if user.id %}
+            <meta name="user_id" content="{{ user.id }}">
+        {% endif %}
+		{% tailwind_css %}
+        <link href="{% static 'fontawesomefree/css/fontawesome.css' %}" rel="stylesheet" type="text/css">
+        <link href="{% static 'fontawesomefree/css/solid.css' %}" rel="stylesheet" type="text/css">
+        <link href="{% static 'assets/remix-icon/remixicon.css' %}" rel="stylesheet" type="text/css">
+	</head>
+
+	<body class="xt-shade-500 dark:text-shade-light dark:bg-shade-dark font-serif leading-normal tracking-normal">
+		<div class="container mx-auto pt-8 pb-4 print:mx-0 print:w-full print:max-w-none print:pt-4">
+        {% language 'pt-br' %}
+			{% block content %}
+            {% endblock %}
+        {% endlanguage %}
+		</div>
+	</body>
+</html>

@@ -1,0 +1,79 @@
+@import url("https://fonts.googleapis.com/css2?family=Asap&family=Poppins&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+    .content {
+        @apply font-asap px-4 py-2 md:px-2
+    }
+    .card {
+        @apply w-full lg:max-w-full lg:flex rounded-md shadow-lg px-6 py-4 bg-shade-light text-shade-dark dark:bg-shade-dark-700 dark:text-shade-light flex flex-col mb-10
+    }
+
+    .card.no-print {
+        @apply print:p-0 print:bg-transparent print:shadow-none print:w-full print:text-shade-light-900;
+    }
+
+    .assignment-card-list {
+        @apply grid grid-cols-1 gap-2 md:grid-cols-4 md:gap-3
+    }
+
+    .assignment-card {
+        @apply card flex mb-2
+    }
+
+    .assignment-card.next-meeting {
+        @apply border-4 border-white
+    }
+
+    .title {
+        @apply w-full text-center text-3xl mb-8
+    }
+
+    .subtitle {
+        @apply w-full text-2xl mb-3
+    }
+
+    .table-striped tbody tr:nth-child(2n) td {
+        @apply dark:bg-shade-dark-400 print:bg-transparent print:text-shade-light-900
+    }
+
+    .table-striped tbody tr td:first-child {
+        @apply dark:bg-shade-dark-500 print:bg-transparent print:text-shade-light-900
+    }
+
+    .btn {
+        @apply font-bold py-2 px-4 rounded;
+    }
+
+    .btn-main {
+        @apply bg-main-500 text-main-50;
+    }
+
+    .btn-main:hover {
+        @apply bg-main-700;
+    }
+
+    .assignment {
+        @apply flex justify-between
+    }
+
+    .assignment-icon {
+        @apply text-center
+    }
+
+    .header {
+        @apply flex justify-between flex-wrap
+    }
+
+    .login {
+        @apply flex flex-col justify-center items-center
+    }
+}
+
+.table td, .table th {
+    padding-top: .5rem;
+    padding-bottom: .5rem;
+}

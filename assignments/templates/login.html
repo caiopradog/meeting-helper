@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="login content">
+        <h2 class="title">Designações Reuniões</h2>
+        <form class="bg-shade-dark-500 shadow-md rounded px-8 pt-6 pb-8 mb-4 w-full md:w-3/12"
+              action="{% url 'assignments.login' %}" method="post">
+            {% csrf_token %}
+            <div class="mb-4">
+                <label class="block mb-2" for="username">
+                    Usuário
+                </label>
+                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-black leading-tight focus:outline-none focus:shadow-outline"
+                       name="username" id="username" type="text" placeholder="Usuário" required>
+            </div>
+            <div class="mb-4">
+                <label class="block mb-2" for="password">
+                    Senha
+                </label>
+                <input class="shadow appearance-none rounded w-full py-2 px-3 text-black leading-tight focus:outline-none focus:shadow-outline"
+                       name="password" id="password" type="password" placeholder="Senha" required>
+            </div>
+            {% if login_error %}
+                <div class="bg-error-light p-2 px-4 rounded mb-4 text-error-dark">
+                    Usuário ou senha não encontrados.
+                </div>
+            {% endif %}
+            <div class="flex items-center justify-between mb-2">
+                <button class="bg-main hover:bg-main-300 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+                    Entrar
+                </button>
+            </div>
+        </form>
+    </div>
+{% endblock %}

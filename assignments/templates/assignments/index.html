@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+{% load webpush_notifications i18n assignment_icons assignment_full_name %}
+
+{% block content %}
+    <div class="content">
+        <h2 class="title">Designações Reuniões</h2>
+        <div class="flex flex-col justify-start md:justify-between md:flex-row mb-3">
+            <div class="flex items-center w-full md:w-fit justify-between">
+                <a class="block btn btn-main mb-4" href="{% url 'assignments' %}?month={{ month|add:-1 }}">
+                    <i class="fa-solid fa-chevron-left"></i>
+                </a>
+                <div class="mx-2 text-lg mb-4">{{ base_date|date:'F/Y' }}</div>
+                <a class="block btn btn-main mb-4" href="{% url 'assignments' %}?month={{ month|add:1 }}">
+                    <i class="fa-solid fa-chevron-right"></i>
+                </a>
+            </div>
+            <div class="flex flex-col md:flex-row">
+                <a class="block btn btn-main mb-4 text-center" href="{{ pdf_url }}">
+                    PDF
+                </a>
+                <button id="webpush-subscribe-button" class="btn btn-main mb-4 ml-0 md:ml-2" data-url="/webpush/save_information">
+                    {% trans 'Subscribe to Push Messaging' %}
+                </button>
+                <a href="{% url 'assignments.logout' %}"
+                   class="block btn bg-shade-dark-700 text-main-50 hover:bg-shade-dark-800 ml-0 md:ml-2 mb-4 text-center">
+                    Logout
+                </a>
+            </div>
+        </div>
+        <div class="assignment-card-list">
+            {% for meeting in meetings %}
+                <div class="assignment-card {% if next_meeting == meeting.date.date %}next-meeting{% endif %}">
+                    <h3 class="subtitle mb-0">
+                        {{ meeting.date|date:'D, d \d\e M' }}
+                    </h3>
+                    {% if meeting.event %}
+                        <div class="event"><b>{{ meeting.event }}</b></div>
+                    {% endif %}
+                    <div class="assignments mt-2">
+                        {% for assignment, assignee in meeting.assignments.items %}
+                            <div class="assignment {% if user.id != assignee.user_id %}opacity-50{% endif %}">
+                                <div class="assignment-icon">
+                                    <div class="inline-block w-6"><i class="{{ assignment | get_assignment_icon }}"></i>
+                                    </div>
+                                    {{ assignment | get_assignement_abreviated_name }}
+                                </div>
+                                <div class="assignee">
+                                    {{ assignee.name|default:"-" }}
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            {% empty %}
+                <h1 class="text-4xl text-center col-span-full mt-10">Não há designações para o mês escolhido</h1>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}
