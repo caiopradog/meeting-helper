@@ -31,7 +31,7 @@ def index(request):
         period_end,
         show_assignments
     )
-    next_meeting = get_next_meeting_day(date.today())
+    next_meeting = get_next_meeting_day(date.today(), allow_same_day=True)
 
     pdf_url = request.get_full_path()
     if '?' in pdf_url:

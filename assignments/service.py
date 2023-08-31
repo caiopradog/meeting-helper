@@ -46,20 +46,13 @@ def get_period_assignments(period_start, period_end, assignment_filter=None):
     return assignments
 
 
-def get_next_meeting_day(date, stay_on_week=False):
+def get_next_meeting_day(date, allow_same_day=False):
     configs = Config.objects.filter(config__endswith='meeting')
-    next_days = {}
     next_meeting = None
     for config in configs:
-        next_day = utils.go_to_next_weekday(date, config.value)
-        next_days[config.config] = {
-            'weekday': config.value,
-            'day': next_day,
-        }
-        if (stay_on_week and date == next_day) or (not stay_on_week and (not next_meeting or next_meeting > next_day)):
+        next_day = utils.go_to_next_weekday(date, config.value, allow_same_day)
+        if not next_meeting or next_meeting > next_day:
             next_meeting = next_day
-            if date == next_day and stay_on_week:
-                break
 
     return next_meeting
 

@@ -7,9 +7,12 @@ def translate_weekday(weekday):
     return days[weekday]
 
 
-def go_to_next_weekday(base_date, day):
+def go_to_next_weekday(base_date, day, allow_same_day):
     weekday = translate_weekday(day)
-    days = (weekday - base_date.weekday() - 1) % 7 + 1
+    if allow_same_day:
+        days = (weekday - base_date.weekday()) % 7
+    else:
+        days = (weekday - base_date.weekday() - 1) % 7 + 1
 
     return base_date + timedelta(days=days)
 
