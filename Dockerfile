@@ -6,7 +6,11 @@ WORKDIR /code
 COPY requirements.txt /code/
 
 # Install wkhtmltopdf
-RUN apt update && apt install -y wkhtmltopdf
+RUN apt update && apt install -y  \
+    nodejs  \
+    npm  \
+    wkhtmltopdf
+
 
 RUN pip install -r requirements.txt
 COPY . /code/
