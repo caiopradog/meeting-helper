@@ -27,7 +27,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get('DEBUG')
 
-ALLOWED_HOSTS = ['192.168.1.200', '127.0.0.1']
+ALLOWED_HOSTS = ['192.168.1.200', '127.0.0.1', '144.22.183.205']
 
 CSRF_COOKIE_SECURE = True
 SESSION_COOKIE_SECURE = True
@@ -136,7 +136,6 @@ LANGUAGE_CODE = 'pt-BR'
 
 LANGUAGES = [
     ('pt-BR', _('Brazilian Portuguese'),),
-    ('en', _('English')),
 ]
 
 LOCALE_PATHS = (BASE_DIR / 'locale/',)
