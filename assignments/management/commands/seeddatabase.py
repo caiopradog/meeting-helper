@@ -11,5 +11,6 @@ class Command(BaseCommand):
         call_command('loaddata', 'fixtures/jobs.json')
         call_command('loaddata', 'fixtures/assignments.json')
         call_command('loaddata', 'fixtures/config.json')
+        call_command('loaddata', 'fixtures/event.json')
 
         self.stdout.write(self.style.SUCCESS('Database was successfully seeded'))
