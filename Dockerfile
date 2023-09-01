@@ -10,4 +10,3 @@ RUN apt update && apt install -y wkhtmltopdf
 
 RUN pip install -r requirements.txt
 COPY . /code/
-RUN python manage.py migrate
