@@ -24,11 +24,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get('SECRET_KEY')
 DEBUG = os.environ.get('DEBUG')
 
-ALLOWED_HOSTS = ['192.168.1.200', '127.0.0.1', '144.22.183.205']
+ALLOWED_HOSTS = ['192.168.1.200', '127.0.0.1', '144.22.183.205', 'caiopradog.com.br']
 
 # Habilitar quando for https
-#CSRF_COOKIE_SECURE = True
-#SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = True
+SESSION_COOKIE_SECURE = True
 
 FORCE_SCRIPT_NAME = os.environ.get("BASE_URL", '/')
 USE_X_FORWARDED_HOST = True
