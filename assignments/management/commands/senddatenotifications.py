@@ -12,8 +12,13 @@ class Command(BaseCommand):
         parser.add_argument('--date', help='Date to send')
 
     def handle(self, *args, **options):
-        assignment_date = options.get('date', date.today())
-        assignments = Assignment.objects.filter(date=assignment_date)
+        base_date = options.get('date')
+        if base_date is None:
+            base_date = date.today()
+        else:
+            base_date = date.fromisoformat(base_date)
+
+        assignments = Assignment.objects.filter(date=base_date)
 
         for assignment in assignments:
             payload = {
