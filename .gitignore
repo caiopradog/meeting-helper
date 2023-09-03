@@ -4,3 +4,5 @@ __pycache__
 .idea
 data
 static/*
+TODO.md
+db.sqlite3
