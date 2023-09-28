@@ -23,7 +23,8 @@ class Command(BaseCommand):
         for assignment in assignments:
             payload = {
                 'head': 'Você tem uma designação hoje!',
-                'body': assignment.get_assignment_display()
+                'body': assignment.get_assignment_display(),
+                "url": "https://caiopradog.com.br/designacoes"
             }
             send_user_notification(user=assignment.assignee.user, payload=payload, ttl=1000)
 
