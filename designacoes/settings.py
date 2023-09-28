@@ -22,7 +22,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 SECRET_KEY = os.environ.get('SECRET_KEY')
-DEBUG = os.environ.get('DEBUG')
+DEBUG = os.environ.get('DEBUG') == "True"
 
 ALLOWED_HOSTS = ['192.168.1.200', '127.0.0.1', '144.22.183.205', 'caiopradog.com.br']
 
@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     'theme',
     'django_browser_reload',
     'webpush',
+    'pwa',
     'fontawesomefree'
 ]
 
@@ -90,19 +91,27 @@ WSGI_APPLICATION = 'designacoes.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-DATABASES = {
+USED_DATABASES = {
     'sqlite': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
     },
-    'default': {
+    'postgres': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.environ.get('POSTGRES_NAME'),
-        'USER': os.environ.get('POSTGRES_USER'),
-        'PASSWORD': os.environ.get('POSTGRES_PASSWORD'),
-        'HOST': 'db',
+        'NAME': os.environ.get('DB_NAME'),
+        'USER': os.environ.get('DB_USER'),
+        'PASSWORD': os.environ.get('DB_PASS'),
+        'HOST': os.environ.get('DB_HOST'),
         'PORT': 5432,
     }
+}
+
+database = USED_DATABASES['postgres']
+if DEBUG is True:
+    database = USED_DATABASES['sqlite']
+
+DATABASES = {
+    'default': database
 }
 
 
@@ -166,3 +175,24 @@ INTERNAL_IPS = [
 
 TAILWIND_APP_NAME = 'theme'
 
+PWA_APP_NAME = 'Designações'
+PWA_APP_DESCRIPTION = "Ajudante de Designações"
+PWA_APP_THEME_COLOR = '#5A98C8'
+PWA_APP_BACKGROUND_COLOR = '#ffffff'
+PWA_APP_DISPLAY = 'fullscreen'
+PWA_APP_ORIENTATION = 'portrait'
+PWA_APP_LANG = 'pt-BR'
+PWA_APP_ICONS = [
+    {
+        'src': f'/{STATIC_URL}images/logo-160.png',
+        'sizes': '160x160'
+    },
+    {
+        'src': f'/{STATIC_URL}images/logo-192.png',
+        'sizes': '192x192'
+    },
+    {
+        'src': f'/{STATIC_URL}images/logo-512.png',
+        'sizes': '512x512'
+    }
+]

@@ -1,13 +1,14 @@
-{% load static tailwind_tags webpush_notifications i18n %}
+{% load static tailwind_tags webpush_notifications i18n pwa %}
 
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-        <title>Ajudante Reuniões</title>
+        <title>Designações</title>
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<meta http-equiv="X-UA-Compatible" content="ie=edge">
         <script type="text/javascript" src="{% url 'js-catalog' %}"></script>
+        <link rel="icon" type="image/x-icon" href="{% static 'images/favicon.jpg' %}">
         {% if request %}
             {% webpush_header %}
         {% endif %}
@@ -15,6 +16,7 @@
             <meta name="user_id" content="{{ user.id }}">
         {% endif %}
 		{% tailwind_css %}
+        {% progressive_web_app_meta %}
         <link href="{% static 'fontawesomefree/css/fontawesome.css' %}" rel="stylesheet" type="text/css">
         <link href="{% static 'fontawesomefree/css/solid.css' %}" rel="stylesheet" type="text/css">
         <link href="{% static 'assets/remix-icon/remixicon.css' %}" rel="stylesheet" type="text/css">
