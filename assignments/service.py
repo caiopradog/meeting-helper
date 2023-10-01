@@ -10,7 +10,7 @@ def get_period_meetings(period_start, period_end, assignment_filter=None):
     meetings = get_meeting_days(period_start, period_end)
 
     for meeting in meetings:
-        meeting_assignments = assignments.filter(date=meeting['date'])
+        meeting_assignments = assignments.filter(date=meeting['date']).order_by('assignment')
         meeting['assignments'] = {assignment.assignment: assignment.assignee for assignment in meeting_assignments}
 
     return [meeting for meeting in meetings if len(list(meeting['assignments'])) > 0 or meeting['event'] is not None]
