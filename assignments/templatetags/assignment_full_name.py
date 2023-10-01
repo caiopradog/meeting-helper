@@ -11,4 +11,4 @@ def get_assignment_full_name(value):
 @register.filter
 def get_assignement_abreviated_name(value):
     name = get_assignment_full_name(value)
-    return name.replace('Indicador', 'Ind.').replace('Microfone', 'Mic.')
+    return name.replace('Indicador', 'Ind.').replace('Microfone', 'Mic.').replace('Estacionamento', 'Estac.')
