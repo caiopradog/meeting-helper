@@ -62,7 +62,6 @@ def get_meeting_days(period_start, period_end):
     date = get_next_meeting_day(period_start, True)
     while date <= period_end:
         period_event = Event.objects.filter(date_start__lte=date).filter(date_end__gte=date).first()
-        print(period_event)
         assignments_filter = [Assignment.FIELD_CONDUCTOR]
         if period_event:
             event_name = period_event.get_type_display()
