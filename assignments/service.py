@@ -59,7 +59,7 @@ def get_next_meeting_day(date, allow_same_day=False):
 
 def get_meeting_days(period_start, period_end):
     days = []
-    date = get_next_meeting_day(period_start)
+    date = get_next_meeting_day(period_start, True)
     while date <= period_end:
         period_event = Event.objects.filter(date_start__lte=date).filter(date_end__gte=date).first()
         assignments_filter = [Assignment.FIELD_CONDUCTOR]
