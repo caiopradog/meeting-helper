@@ -13,7 +13,7 @@ def get_period_meetings(period_start, period_end, assignment_filter=None):
         meeting_assignments = assignments.filter(date=meeting['date'])
         meeting['assignments'] = {assignment.assignment: assignment.assignee for assignment in meeting_assignments}
 
-    return [meeting for meeting in meetings if len(list(meeting['assignments'])) > 0]
+    return [meeting for meeting in meetings if len(list(meeting['assignments'])) > 0 or meeting['event'] is not None]
 
 
 def generate_meeting_assignments(period_start, period_end, delete_assignments=False):
@@ -62,6 +62,7 @@ def get_meeting_days(period_start, period_end):
     date = get_next_meeting_day(period_start, True)
     while date <= period_end:
         period_event = Event.objects.filter(date_start__lte=date).filter(date_end__gte=date).first()
+        print(period_event)
         assignments_filter = [Assignment.FIELD_CONDUCTOR]
         if period_event:
             event_name = period_event.get_type_display()
