@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load webpush_notifications i18n assignment_icons assignment_full_name %}
+{% load webpush_notifications i18n assignment event_type load_env %}
 
 {% block content %}
     <div class="content">
@@ -18,7 +18,7 @@
                 <a class="block btn btn-main mb-4 text-center" href="{{ pdf_url }}">
                     PDF
                 </a>
-                <button id="webpush-subscribe-button" class="btn btn-main mb-4 ml-0 md:ml-2" data-url="/designacoes/webpush/save_information">
+                <button id="webpush-subscribe-button" class="btn btn-main mb-4 ml-0 md:ml-2" data-url="{% get_env_var 'BASE_URL' %}/webpush/save_information">
                     Receber notificações
                 </button>
                 <a href="{% url 'assignments.logout' %}"
@@ -34,18 +34,25 @@
                         {{ meeting.date|date:'D, d \d\e M' }}
                     </h3>
                     {% if meeting.event %}
-                        <div class="event"><b>{{ meeting.event }}</b></div>
+                        <div class="event">
+                            <b class="text-3xl">
+                                Semana
+                                {% if meeting.event.type == 'OVERSEER'|event_type %} da {% else %} de {% endif %}
+                                {{ meeting.event }}
+                            </b>
+                        </div>
                     {% endif %}
                     <div class="assignments mt-2">
                         {% for assignment, assignee in meeting.assignments.items %}
-                            <div class="assignment {% if user.id != assignee.user_id %}opacity-50{% endif %}">
+                            <div class="assignment {% if user.id != assignee.id %}opacity-50{% endif %}">
                                 <div class="assignment-icon">
-                                    <div class="inline-block w-6"><i class="{{ assignment | get_assignment_icon }}"></i>
+                                    <div class="inline-block w-6">
+                                        <i class="{{ assignment | get_assignment_icon }}"></i>
                                     </div>
                                     {{ assignment | get_assignement_abreviated_name }}
                                 </div>
                                 <div class="assignee">
-                                    {{ assignee.name|default:"-" }}
+                                    {{ assignee|default:"-" }}
                                 </div>
                             </div>
                         {% endfor %}

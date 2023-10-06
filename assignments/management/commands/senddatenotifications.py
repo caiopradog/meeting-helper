@@ -1,5 +1,4 @@
-from django.core.management.base import BaseCommand, CommandError
-from django.contrib.auth.models import User
+from django.core.management.base import BaseCommand
 from assignments.models import Assignment
 from datetime import date
 from notifications.service import send_user_notification
@@ -26,6 +25,6 @@ class Command(BaseCommand):
                 'body': assignment.get_assignment_display(),
                 "url": "https://caiopradog.com.br/designacoes"
             }
-            send_user_notification(user=assignment.assignee.user, payload=payload, ttl=1000)
+            send_user_notification(user=assignment.assignee, payload=payload, ttl=1000)
 
         self.stdout.write(self.style.SUCCESS('Sent notification'))

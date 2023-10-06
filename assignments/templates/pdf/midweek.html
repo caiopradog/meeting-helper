@@ -73,9 +73,9 @@
                 {% if meeting.event and meeting.event.type != 'OVERSEER'|event_type %}
                     <th colspan="3">{{ meeting.event }}</th>
                 {% else %}
-                    <th>{{ meeting.assignments.AV.name }}</th>
-                    <th>{{ meeting.assignments.ML.name }}</th>
-                    <th>{{ meeting.assignments.MR.name }}</th>
+                    <th>{{ meeting.assignments.AV }}</th>
+                    <th>{{ meeting.assignments.ML }}</th>
+                    <th>{{ meeting.assignments.MR }}</th>
                 {% endif %}
             </tr>
         {% empty %}
@@ -100,9 +100,9 @@
                 {% if meeting.event and meeting.event.type != 'OVERSEER'|event_type %}
                     <th colspan="3">{{ meeting.event }}</th>
                 {% else %}
-                    <th>{{ meeting.assignments.IA.name }}</th>
-                    <th>{{ meeting.assignments.IE.name }}</th>
-                    <th>{{ meeting.assignments.IP.name }}</th>
+                    <th>{{ meeting.assignments.IA }}</th>
+                    <th>{{ meeting.assignments.IE }}</th>
+                    <th>{{ meeting.assignments.IP }}</th>
                 {% endif %}
             </tr>
         {% empty %}
@@ -126,10 +126,10 @@
                 {% if meeting.event and meeting.event.type != 'OVERSEER'|event_type %}
                     <th colspan="2">{{ meeting.event }}</th>
                 {% else %}
-                    <th>{{ meeting.assignments.MC.name }}</th>
+                    <th>{{ meeting.assignments.MC }}</th>
                     <th>
-                        {% if meeting.assignments.RW.name %}
-                            {{ meeting.assignments.RW.name }}
+                        {% if meeting.assignments.RW %}
+                            {{ meeting.assignments.RW }}
                         {% else %}
                             <b>{{ meeting.event }}</b>
                         {% endif %}

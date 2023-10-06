@@ -18,7 +18,7 @@ class JobModelDataAdmin(admin.ModelAdmin):
     ordering = ['-date']
 
     def assignee_name(self, obj):
-        return obj.assignee.name
+        return obj.assignee
 
     assignee_name.short_description = 'Voluntário'
 

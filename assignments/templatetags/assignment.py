@@ -4,6 +4,17 @@ register = template.Library()
 
 
 @register.filter
+def get_assignment_full_name(value):
+    return [choice[1] for choice in Assignment.ASSIGNMENT_CHOICES if choice[0] == value][0]
+
+
+@register.filter
+def get_assignement_abreviated_name(value):
+    name = get_assignment_full_name(value)
+    return name.replace('Indicador', 'Ind.').replace('Microfone', 'Mic.').replace('Estacionamento', 'Estac.')
+
+
+@register.filter
 def get_assignment_icon(value):
     if value == Assignment.MICROPHONE_LEFT or value == Assignment.MICROPHONE_RIGHT:
         return 'fa-solid fa-microphone'

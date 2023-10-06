@@ -1,20 +1,34 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 
 # Create your models here.
 
 
 class Person(models.Model):
-    name = models.CharField(max_length=100, null=True, blank=True)
     status = models.BooleanField(default=True)
-    user = models.OneToOneField(User, null=True, blank=True, on_delete=models.SET_NULL)
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+
+    def name(self):
+        return f'{self.user.first_name} {self.user.last_name}'
 
     def __str__(self):
-        return self.name
+        return self.name()
 
     class Meta:
         verbose_name_plural = 'people'
-        ordering = ('name',)
+
+
+@receiver(post_save, sender=User)
+def create_user_profile(sender, instance, created, **kwargs):
+    if created:
+        Person.objects.create(user=instance)
+
+
+@receiver(post_save, sender=User)
+def save_user_profile(sender, instance, **kwargs):
+    instance.person.save()
 
 
 class Job(models.Model):

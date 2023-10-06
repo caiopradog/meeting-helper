@@ -1,7 +1,19 @@
 from django.db import models
-from volunteers.models import Person
+from django.contrib.auth.models import User
 
 # Create your models here.
+
+
+class Person(User):
+    class Meta:
+        proxy = True
+        ordering = ('first_name', 'last_name')
+
+    def name(self):
+        return f'{self.first_name} {self.last_name}'
+
+    def __str__(self):
+        return self.name()
 
 
 class Assignment(models.Model):
@@ -34,7 +46,7 @@ class Assignment(models.Model):
     )
 
     def __str__(self):
-        return f'{self.date} - {self.get_assignment_display()} - {self.assignee.name}'
+        return f'{self.date} - {self.get_assignment_display()} - {self.assignee}'
 
 
 class Event(models.Model):
