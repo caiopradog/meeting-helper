@@ -71,7 +71,7 @@
             <tr>
                 <th>{{ meeting.date|date:'D, d \d\e M' }}</th>
                 {% if meeting.event and meeting.event.type != 'OVERSEER'|event_type %}
-                    <th colspan="3">{{ meeting.event.type }}</th>
+                    <th colspan="3">{{ meeting.event }}</th>
                 {% else %}
                     <th>{{ meeting.assignments.AV.name }}</th>
                     <th>{{ meeting.assignments.ML.name }}</th>
@@ -98,7 +98,7 @@
             <tr>
                 <th>{{ meeting.date|date:'D, d \d\e M' }}</th>
                 {% if meeting.event and meeting.event.type != 'OVERSEER'|event_type %}
-                    <th colspan="3">{{ meeting.event.type }}</th>
+                    <th colspan="3">{{ meeting.event }}</th>
                 {% else %}
                     <th>{{ meeting.assignments.IA.name }}</th>
                     <th>{{ meeting.assignments.IE.name }}</th>
@@ -124,7 +124,7 @@
             <tr>
                 <th>{{ meeting.date|date:'D, d \d\e M' }}</th>
                 {% if meeting.event and meeting.event.type != 'OVERSEER'|event_type %}
-                    <th colspan="2">{{ meeting.event.type }}</th>
+                    <th colspan="2">{{ meeting.event }}</th>
                 {% else %}
                     <th>{{ meeting.assignments.MC.name }}</th>
                     <th>
