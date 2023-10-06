@@ -1,5 +1,4 @@
 from django.contrib import admin
-from django.db.models.functions import Coalesce
 from .models import Person, Job
 
 # Register your models here.
@@ -13,7 +12,7 @@ class VolunteerModelDataAdmin(admin.ModelAdmin):
 @admin.register(Job)
 class JobModelDataAdmin(admin.ModelAdmin):
     list_display = (
-        'volunteer_name',
+        'volunteer',
         'can_microphone',
         'can_indicator',
         'can_sound',
@@ -29,7 +28,7 @@ class JobModelDataAdmin(admin.ModelAdmin):
         'can_read_watchtower',
         'can_public_meeting_conductor'
     ]
-    ordering = ['volunteer__name']
+    ordering = ['volunteer']
 
     def volunteer_name(self, obj):
         return obj.volunteer.name

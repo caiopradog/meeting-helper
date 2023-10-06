@@ -1,19 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import User
+from volunteers.models import Person
 
 # Create your models here.
-
-
-class Person(User):
-    class Meta:
-        proxy = True
-        ordering = ('first_name', 'last_name')
-
-    def name(self):
-        return f'{self.first_name} {self.last_name}'
-
-    def __str__(self):
-        return self.name()
 
 
 class Assignment(models.Model):

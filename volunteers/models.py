@@ -7,14 +7,15 @@ from django.dispatch import receiver
 
 
 class Person(models.Model):
+    name = models.CharField(max_length=100, null=True, blank=True)
     status = models.BooleanField(default=True)
     user = models.OneToOneField(User, on_delete=models.CASCADE)
 
-    def name(self):
+    def user_name(self):
         return f'{self.user.first_name} {self.user.last_name}'
 
     def __str__(self):
-        return self.name()
+        return self.user_name()
 
     class Meta:
         verbose_name_plural = 'people'
