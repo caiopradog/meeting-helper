@@ -7,7 +7,7 @@ def translate_weekday(weekday):
     return days[weekday]
 
 
-def go_to_next_weekday(base_date, day, allow_same_day):
+def go_to_next_weekday(base_date, day, allow_same_day=False):
     weekday = translate_weekday(day)
     if allow_same_day:
         days = (weekday - base_date.weekday()) % 7
@@ -15,6 +15,16 @@ def go_to_next_weekday(base_date, day, allow_same_day):
         days = (weekday - base_date.weekday() - 1) % 7 + 1
 
     return base_date + timedelta(days=days)
+
+
+def go_to_last_weekday(base_date, day, allow_same_day=False):
+    weekday = translate_weekday(day)
+    if allow_same_day:
+        days = (base_date.weekday() - weekday) % 7
+    else:
+        days = (base_date.weekday() - weekday - 1) % 7 + 1
+
+    return base_date - timedelta(days=days)
 
 
 def get_first_and_last_days_of_month(base_date=datetime.now(), add_months=0):
