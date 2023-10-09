@@ -44,7 +44,7 @@
                     {% endif %}
                     <div class="assignments mt-2">
                         {% for assignment, assignee in meeting.assignments.items %}
-                            <div class="assignment {% if user.id != assignee.id %}opacity-50{% endif %}">
+                            <div class="assignment {% if user.id != assignee.user.id %}opacity-50{% endif %}">
                                 <div class="assignment-icon">
                                     <div class="inline-block w-6">
                                         <i class="{{ assignment | get_assignment_icon }}"></i>
