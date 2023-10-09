@@ -91,12 +91,8 @@ WSGI_APPLICATION = 'designacoes.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-USED_DATABASES = {
-    'sqlite': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    },
-    'postgres': {
+DATABASES = {
+    'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': os.environ.get('DB_NAME'),
         'USER': os.environ.get('DB_USER'),
@@ -104,14 +100,6 @@ USED_DATABASES = {
         'HOST': os.environ.get('DB_HOST'),
         'PORT': 5432,
     }
-}
-
-database = USED_DATABASES['postgres']
-if DEBUG is True:
-    database = USED_DATABASES['sqlite']
-
-DATABASES = {
-    'default': database
 }
 
 
