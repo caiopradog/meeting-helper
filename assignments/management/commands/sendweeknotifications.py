@@ -24,7 +24,7 @@ class Command(BaseCommand):
         assignments = Assignment.objects.filter(date__range=[monday, sunday]).filter(assignee=1)
         for assignment in assignments.only('assignee').distinct():
             assignee = assignment.assignee
-            user_assignments = assignments.filter(assignee=assignment)
+            user_assignments = assignments.filter(assignee=assignee)
             head = f'Você tem {len(user_assignments)} {"designação" if len(user_assignments) == 1 else "designações"} essa semana!'
             body = '\n'.join(
                 [f'{format_date(assignment.date, "d/m/Y")}: {assignment.get_assignment_display()}' for assignment in
