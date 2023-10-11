@@ -25,6 +25,6 @@ class Command(BaseCommand):
                 'body': assignment.get_assignment_display(),
                 "url": "https://caiopradog.com.br/designacoes"
             }
-            send_user_notification(user=assignment.assignee, payload=payload, ttl=1000)
+            send_user_notification(user=assignment.assignee.user, payload=payload, ttl=1000)
 
         self.stdout.write(self.style.SUCCESS('Sent notification'))

@@ -22,8 +22,9 @@ class Command(BaseCommand):
         sunday = utils.go_to_next_weekday(monday, 'Sunday')
 
         assignments = Assignment.objects.filter(date__range=[monday, sunday]).filter(assignee=1)
-        for user in assignments.only('assignee').distinct():
-            user_assignments = assignments.filter(assignee=user.assignee)
+        for assignment in assignments.only('assignee').distinct():
+            assignee = assignment.assignee
+            user_assignments = assignments.filter(assignee=assignment)
             head = f'Você tem {len(user_assignments)} {"designação" if len(user_assignments) == 1 else "designações"} essa semana!'
             body = '\n'.join(
                 [f'{format_date(assignment.date, "d/m/Y")}: {assignment.get_assignment_display()}' for assignment in
@@ -33,6 +34,6 @@ class Command(BaseCommand):
                 'body': body,
                 "url": "https://caiopradog.com.br/designacoes"
             }
-            send_user_notification(user=user.assignee, payload=payload, ttl=1000)
+            send_user_notification(user=assignee.user, payload=payload, ttl=1000)
 
         self.stdout.write(self.style.SUCCESS('Sent notification'))
