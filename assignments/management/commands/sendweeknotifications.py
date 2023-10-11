@@ -21,13 +21,13 @@ class Command(BaseCommand):
         monday = utils.go_to_last_weekday(base_date, 'Monday', True)
         sunday = utils.go_to_next_weekday(monday, 'Sunday')
 
-        assignments = Assignment.objects.filter(date__range=[monday, sunday]).filter(assignee=1)
-        for assignment in assignments.only('assignee').distinct():
+        assignments = Assignment.objects.filter(date__range=[monday, sunday])
+        for assignment in assignments.distinct('assignee'):
             assignee = assignment.assignee
-            user_assignments = assignments.filter(assignee=assignee)
+            user_assignments = assignments.filter(assignee=assignee).order_by('date')
             head = f'Você tem {len(user_assignments)} {"designação" if len(user_assignments) == 1 else "designações"} essa semana!'
             body = '\n'.join(
-                [f'{format_date(assignment.date, "d/m/Y")}: {assignment.get_assignment_display()}' for assignment in
+                [f'{format_date(assignment.date, "l - d/m/Y")}: {assignment.get_assignment_display()}' for assignment in
                  user_assignments])
             payload = {
                 'head': head,
