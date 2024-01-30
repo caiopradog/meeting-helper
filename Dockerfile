@@ -1,5 +1,5 @@
 # syntax=docker/dockerfile:1
-FROM python:3
+FROM python:3.10
 ENV PYTHONDONTWRITEBYTECODE=1
 ENV PYTHONUNBUFFERED=1
 WORKDIR /code
@@ -14,3 +14,4 @@ RUN apt update && apt install -y  \
 
 RUN pip install -r requirements.txt
 COPY . /code/
+RUN python manage.py tailwind install
