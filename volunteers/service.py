@@ -26,7 +26,7 @@ def get_next_volunteer_for_assignment(assignment, working_people):
     current_assignment = Q(volunteer__assignment__assignment=assignment)
     people = Job.objects\
         .filter(volunteer__status=True)\
-        .annotate(last_assignment=Max('volunteer__assignment__date', filter=current_assignment))\
+        .annotate(last_assignment=Max('volunteer__assignment__date', default='1901-01-01', filter=current_assignment))\
         .order_by('last_assignment', 'volunteer__name')\
         .exclude(volunteer_id__in=working_people)
     people = filter_volunteer_by_assignment(people, assignment)

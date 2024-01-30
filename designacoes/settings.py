@@ -24,7 +24,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get('SECRET_KEY')
 DEBUG = os.environ.get('DEBUG') == "True"
 
-ALLOWED_HOSTS = ['192.168.1.200', '127.0.0.1', '144.22.183.205', 'caiopradog.com.br']
+ALLOWED_HOSTS = ['192.168.1.200', '127.0.0.1', 'localhost', '144.22.183.205', 'caiopradog.com.br']
 
 # Habilitar quando for https
 CSRF_COOKIE_SECURE = True
